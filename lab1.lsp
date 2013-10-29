@@ -1,9 +1,3 @@
-(defun plus (a b) 
-    (cond 
-		((and (numberp a) (numberp b)) (+ a b))
-		(t nil)
-	)
-)
 (defun sumakw (L)
     (cond 
 		((null L) 0) 
@@ -50,6 +44,30 @@
 		(T nil)
 	)
 )
+
+(defun my-last (L)
+	(cond
+		((atom L) L)
+		((null (cdr L)) (my-last (car L)))
+		(T (my-last (cdr L)))
+	)
+)
+
+(defun rotate-right (L)
+	(cond
+		((list L) (cons (car (reverse L)) (reverse (cdr (reverse L)))))
+		(T nil)
+	)
+)
+
+(print (sumakw '(1 2)))
+(print (liczba '(1 2 a)))
+(print (lnum '(1 2 a)))
+(print (my-max '(1 2)))
+(print (potega 2 (- 2)))
+(print (listnump '((aa (a b)) (2) a)))
+(print (my-last '((aa (a b)) (2) a)))
+(print (rotate-right '(1 (2 3) 4)))
 
 
 

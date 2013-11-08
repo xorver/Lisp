@@ -12,3 +12,20 @@
 		L
 	)
 )
+
+
+(defun flatten (L)
+	(mapcar
+	#'(lambda (K)
+		(apply '+ (mapcar 
+						#'(lambda (A) (cond 
+							((listp A) (flatten A)) 
+							(T A))
+						)
+						K
+					)
+		)
+	)
+	L
+	)
+)

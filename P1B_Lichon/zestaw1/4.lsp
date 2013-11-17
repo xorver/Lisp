@@ -1,9 +1,24 @@
 ;Tomasz Lichon
 
-(defun my-last (L)
-	(cond
-		((atom L) L)
-		((null (cdr L)) (my-last (car L)))
-		(T (my-last (cdr L)))
+(defun suma (A B)
+	(setq R '())
+	(mapcar 
+		#'(lambda (E) (cond
+						((null E) E)
+						((find E R) E) 
+						(T (setq R (append R (list E))) E)
+					)
+		)
+		A
 	)
+		(mapcar 
+		#'(lambda (E) (cond
+						((null E) E)
+						((find E R) E) 
+						(T (setq R (append R (list E))) E)
+					)
+		)
+		B
+	)
+	R
 )

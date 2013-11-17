@@ -1,10 +1,21 @@
 ;Tomasz Lichon
 
-(defun potega (A N)
-	(cond 
-		((= N 0) 1)
-		((= N 1) A)
-		((< N 0) (potega (/ 1 A) (- N)))
-		(T (* A (potega A (- N 1))))
+(defun sum (K)
+	(apply '+ (mapcar 
+				#'(lambda (A) 
+					(cond 
+						((listp A) (sum A))
+						(T A)
+					)
+				)
+				K
+			)
+	)
+)
+
+(defun flatten (L)
+	(mapcar
+		#'(lambda (A) (cond ((atom A) A) (T (sum A))))
+		L
 	)
 )

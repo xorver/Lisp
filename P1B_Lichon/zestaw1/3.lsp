@@ -1,10 +1,9 @@
 ;Tomasz Lichon
 
-(defun listnump (L)
+(defun my-find (el L)	
 	(cond
 		((null L) nil)
-		((listp L) (or (listnump (car L)) (listnump (cdr L))))
-		((numberp L) T)
-		(T nil)
+		((atom L) nil)
+		(T (or (equal el (car L)) (my-find el (cdr L)) (my-find el (car L)) ))
 	)
 )

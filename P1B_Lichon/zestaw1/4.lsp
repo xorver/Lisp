@@ -1,24 +1,56 @@
 ;Tomasz Lichon
 
-(defun suma (A B)
-	(setq R '())
-	(mapcar 
-		#'(lambda (E) (cond
-						((null E) E)
-						((find E R) E) 
-						(T (setq R (append R (list E))) E)
-					)
+(defun suma (A1 B1)
+	(let 
+		(
+			(A A1)
+			(B B1)
+			(R '() )
 		)
-		A
-	)
+		(RSORT A #'(lambda (X Y) 
+				(string< 
+					(write-to-string X) 
+					(write-to-string Y)
+				)
+			)
+		)
+		(RSORT B #'(lambda (X Y) 
+				(string< 
+					(write-to-string X) 
+					(write-to-string Y)
+				)
+			)
+		)	
 		(mapcar 
-		#'(lambda (E) (cond
-						((null E) E)
-						((find E R) E) 
-						(T (setq R (append R (list E))) E)
-					)
+			#'(lambda (E) (cond
+					((null E) E)
+					((my-find  E R) E) 
+					(T (setq R (append R (list E))) E)
+				)
+			)
+			A
 		)
-		B
+		(mapcar 
+			#'(lambda (E) (cond
+					((null E) E)
+					((my-find E R) E) 
+					(T (setq R (append R (list E))) E)
+				)
+			)
+			B
+		)
+		R
 	)
-	R
+)
+
+(defun RSORT (DATA FUN)
+	(map 'list 
+		#'(lambda (X) 
+			(cond 
+				((listp X) (RSORT X FUN))
+			)
+		)
+		DATA
+	)
+	(sort DATA FUN)
 )
